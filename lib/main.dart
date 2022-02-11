@@ -37,7 +37,7 @@ class _MyHomeAppState extends State<MyHomeApp> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(30.10),
+          padding: const EdgeInsets.all(7.10),
           child: Column(
             children: [
               Image.asset(
@@ -45,15 +45,28 @@ class _MyHomeAppState extends State<MyHomeApp> {
                 height: 200,
               ),
               Container(
-                padding: const EdgeInsets.all(20.30),
+                padding: const EdgeInsets.all(5),
               ),
-              Register("assets/images/img1", "Username", Colors.grey),
+              Register(const Icon(Icons.person), "Username"),
+              Container(
+                padding: const EdgeInsets.all(2.8),
+              ),
+              Register(const Icon(Icons.email_rounded), "Email Address"),
+              Container(
+                padding: const EdgeInsets.all(2.8),
+              ),
+              Pass(const Icon(Icons.lock), "Password"),
+              Container(
+                padding: const EdgeInsets.all(2.8),
+              ),
+              Pass(const Icon(Icons.lock), "Confirm Password"),
+              Container(
+                padding: const EdgeInsets.all(2.8),
+              ),
+              Register(
+                  const Icon(Icons.phone_android_outlined), "Phone Number"),
               Container(
                 padding: const EdgeInsets.all(5.30),
-              ),
-              Register("assets/images/img1", "Email", Colors.grey),
-              Container(
-                padding: const EdgeInsets.all(20.30),
                 child: TextButton(
                   child: Text(
                     "Register",
