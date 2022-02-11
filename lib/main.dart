@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testapp1/MoneyBox.dart';
+import 'package:testapp1/regis.dart';
 import 'dart:ui';
 
 void main() {
@@ -33,34 +33,35 @@ class _MyHomeAppState extends State<MyHomeApp> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Test Container",
+            "Register",
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(30.10),
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                height: 120,
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                    color: Colors.blue.shade200,
-                    borderRadius: BorderRadius.circular(20)),
-                child: InputDecoratorExample(),
+              Image.asset(
+                "assets/images/profile.jpg",
+                height: 200,
               ),
-              MoneyBox("ยอดคงเหลือ", 30000, 120, Colors.purple.shade200),
-              MoneyBox("รายรับ", 10000, 100, Colors.yellow.shade200),
-              MoneyBox("รายจ่าย", 8000, 100, Colors.green.shade200),
               Container(
+                padding: const EdgeInsets.all(20.30),
+              ),
+              Register("assets/images/img1", "Username", Colors.grey),
+              Container(
+                padding: const EdgeInsets.all(5.30),
+              ),
+              Register("assets/images/img1", "Email", Colors.grey),
+              Container(
+                padding: const EdgeInsets.all(20.30),
                 child: TextButton(
                   child: Text(
-                    "button",
-                    style: TextStyle(fontSize: 22),
+                    "Register",
+                    style: TextStyle(fontSize: 18),
                   ),
                   style: TextButton.styleFrom(
                     primary: Colors.white,
-                    backgroundColor: Colors.grey,
+                    backgroundColor: Colors.pinkAccent,
                   ),
                   onPressed: () {},
                 ),
@@ -68,33 +69,5 @@ class _MyHomeAppState extends State<MyHomeApp> {
             ],
           ),
         ));
-  }
-}
-
-class InputDecoratorExample extends StatelessWidget {
-  const InputDecoratorExample({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        labelText: 'Account Name',
-        labelStyle:
-            MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-          final Color color = states.contains(MaterialState.error)
-              ? Theme.of(context).errorColor
-              : Colors.orange;
-          return TextStyle(color: color, letterSpacing: 1.3);
-        }),
-      ),
-      validator: (String? value) {
-        if (value == null || value == '') {
-          return 'Enter name';
-        }
-        return null;
-      },
-      autovalidateMode: AutovalidateMode.always,
-    );
   }
 }

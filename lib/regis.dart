@@ -11,9 +11,9 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.person),
         focusColor: Colors.black,
         border: const OutlineInputBorder(),
-        fillColor: Colors.pink,
         labelText: title,
         labelStyle:
             MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
