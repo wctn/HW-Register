@@ -15,6 +15,7 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(right: 20, left: 20),
+        constraints: const BoxConstraints.tightFor(height: 50),
         child: new TextFormField(
           decoration: InputDecoration(
             prefixIcon: icon,
@@ -52,6 +53,7 @@ class Pass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(right: 20, left: 20),
+        constraints: const BoxConstraints.tightFor(height: 50),
         child: new TextFormField(
           obscureText: true,
           decoration: InputDecoration(

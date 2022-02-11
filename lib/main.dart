@@ -36,16 +36,18 @@ class _MyHomeAppState extends State<MyHomeApp> {
             "Register",
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(7.10),
+        body: Center(
           child: Column(
             children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+              ),
               Image.asset(
                 "assets/images/profile.jpg",
                 height: 200,
               ),
               Container(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(8),
               ),
               Register(const Icon(Icons.person), "Username"),
               Container(
@@ -66,15 +68,40 @@ class _MyHomeAppState extends State<MyHomeApp> {
               Register(
                   const Icon(Icons.phone_android_outlined), "Phone Number"),
               Container(
-                padding: const EdgeInsets.all(5.30),
+                padding: const EdgeInsets.all(2.8),
+              ),
+              ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Register'),
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(300, 45)),
+                      overlayColor:
+                          MaterialStateProperty.all(Colors.pink.shade200),
+                      textStyle: MaterialStateProperty.all(
+                        const TextStyle(fontSize: 16),
+                      ))),
+              Container(
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Already have an Account?",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                  )),
+              Container(
+                alignment: Alignment.centerRight,
                 child: TextButton(
                   child: Text(
-                    "Register",
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  style: TextButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Colors.pinkAccent,
+                    "Login",
+                    style: TextStyle(fontSize: 16, color: Colors.pinkAccent),
                   ),
                   onPressed: () {},
                 ),
