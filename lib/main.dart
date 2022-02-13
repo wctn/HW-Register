@@ -87,15 +87,13 @@ class _MyHomeAppState extends State<MyHomeApp> {
                         const TextStyle(fontSize: 16),
                       ))),
               Container(
-                  margin: EdgeInsets.symmetric(vertical: 20),
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "Already have an Account?",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
-                  )),
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text(
+                  "Already have an Account ?",
+                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                ),
+              ),
               Container(
                 alignment: Alignment.centerRight,
                 child: TextButton(
