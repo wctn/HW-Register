@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:testapp1/regis.dart';
 import 'dart:ui';
+import 'welcome_page.dart';
 
 void main() {
-  var app = runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,21 +12,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "My App",
-      home: MyHomeApp(),
-      theme: ThemeData(primarySwatch: Colors.pink),
+      title: "Flutter Demo",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Form(),
     );
   }
 }
 
-class MyHomeApp extends StatefulWidget {
-  const MyHomeApp({Key? key}) : super(key: key);
+class Form extends StatefulWidget {
+  const Form({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _MyHomeAppState createState() => _MyHomeAppState();
+  _FormState createState() => _FormState();
 }
 
-class _MyHomeAppState extends State<MyHomeApp> {
+class _FormState extends State<Form> {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _gpa = TextEditingController();
+  TextEditingController _education = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     List<Widget> data = [];
@@ -36,74 +45,208 @@ class _MyHomeAppState extends State<MyHomeApp> {
             "Register",
           ),
         ),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _name,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'ชื่อ-นามสกุล'),
+                ),
               ),
-              Image.asset(
-                "assets/images/profile.jpg",
-                height: 200,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _email,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'E-mail'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _education,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'วุฒิการศึกษา'),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _gpa,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'GPA'),
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+              DropdownButton<String>(
+                hint: Text('โครงการรับสมัคร'),
+                items: <String>[
+                  'โครงการรับตรงสอบข้อเขียน',
+                  'โครงการโควตาพื้นที่',
+                  'โครงการ portfolio',
+                  'โครงการเรียนดี',
+                  'โครงการรับตรงใช้คะแนน GAT/PAT'
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
               ),
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  'ภาควิชาและสาขาวิชาที่ต้องการสมัครเรียน',
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-              Register(const Icon(Icons.person), "Username"),
               Container(
-                padding: const EdgeInsets.all(2.8),
+                padding: const EdgeInsets.all(2.0),
+                child: Text(
+                  'ภาควิชาเทคโนโลยีสารสนเทศ',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
-              Register(const Icon(Icons.email_rounded), "Email Address"),
-              Container(
-                padding: const EdgeInsets.all(2.8),
+              DropdownButton<String>(
+                hint: Text('หลักสูตร 4 ปีรับ ม.6 ปวช.'),
+                items: <String>[
+                  'สาขาวิชาเทคโนโลยีสารสนเทศ (IT) ',
+                  'สาขาวิชาวิศวกรรมสารสนเทศและเครือข่าย (INE)'
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
               ),
-              Pass(const Icon(Icons.lock), "Password"),
-              Container(
-                padding: const EdgeInsets.all(2.8),
+              DropdownButton<String>(
+                hint: Text('หลักสูตร ต่อเนื่อง รับ ปวส.'),
+                items: <String>[
+                  'สาขาวิชาเทคโนโลยีสารสนเทศ (ITI)',
+                  'สาขาวิชาวิศวกรรมสารสนเทศและเครือข่าย (INET)'
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
               ),
-              Pass(const Icon(Icons.lock), "Confirm Password"),
               Container(
-                padding: const EdgeInsets.all(2.8),
+                padding: const EdgeInsets.all(.0),
+                child: Text(
+                  'ภาควิชาการจัดการอุตสาหกรรม',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
-              Register(
-                  const Icon(Icons.phone_android_outlined), "Phone Number"),
+              DropdownButton<String>(
+                hint: Text('หลักสูตร 4 ปีรับ ม.6 ปวช.'),
+                items: <String>[
+                  'สาขาวิชาวิสวกรรมอุตสาหกรรมและการจัดการ (IEM)',
+                  'สาขาวิชาเทคโนโลยีเครื่องกลและกระบวนการผลิต (MM)'
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
+              ),
+              DropdownButton<String>(
+                hint: Text('หลักสูตร ต่อเนื่อง รับ ปวส.'),
+                items: <String>[
+                  'สาขาวิชาเทคโนโลยีสารสนเทศ (ITI)',
+                  'สาขาวิชาวิศวกรรมสารสนเทศและเครือข่าย (INET)'
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
+              ),
               Container(
-                padding: const EdgeInsets.all(2.8),
+                padding: const EdgeInsets.all(2.0),
+                child: Text(
+                  'ภาควิชาวิศวกรรมเกษตรเพื่ออุตสาหกรรม',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              DropdownButton<String>(
+                hint: Text('หลักสูตร 4 ปีรับ ม.6 ปวช.'),
+                items: <String>[
+                  'สาขาวิชาวิศวกรรมเกษตรและอาหาร (AFE) ',
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
+              ),
+              DropdownButton<String>(
+                hint: Text('หลักสูตร ต่อเนื่อง รับ ปวส.'),
+                items: <String>[
+                  'สาขาวิชาวิศวกรรมเกษตรและอาหาร (AFET)',
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
+              ),
+              Container(
+                padding: const EdgeInsets.all(2.0),
+                child: Text(
+                  'ภาควิชาการออกแบบและบริหารงานก่อสร้าง',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              DropdownButton<String>(
+                hint: Text('หลักสูตร 4 ปีรับ ม.6 ปวช.'),
+                items: <String>[
+                  'สาขาวิชาคอมพิวเตอร์ช่วยออกแบบและบริหารงานก่อสร้าง (CA) ',
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
+              ),
+              DropdownButton<String>(
+                hint: Text('หลักสูตร ต่อเนื่อง รับ ปวส.'),
+                items: <String>[
+                  'สาขาวิชาคอมพิวเตอร์ช่วยออกแบบและบริหารงานก่อสร้าง (CDM)',
+                ].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
               ),
               ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Register'),
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => WelcomePage(
+                          name: _name.text,
+                          email: _email.text,
+                          education: _education.text,
+                          gpa: _gpa.text,
                         ),
                       ),
-                      minimumSize:
-                          MaterialStateProperty.all(const Size(300, 45)),
-                      overlayColor:
-                          MaterialStateProperty.all(Colors.pink.shade200),
-                      textStyle: MaterialStateProperty.all(
-                        const TextStyle(fontSize: 16),
-                      ))),
-              Container(
-                alignment: Alignment.centerRight,
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Text(
-                  "Already have an Account ?",
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  child: Text(
-                    "Login",
-                    style: TextStyle(fontSize: 16, color: Colors.pinkAccent),
-                  ),
-                  onPressed: () {},
-                ),
-              )
+                    );
+                  },
+                  child: Text('Register'))
             ],
           ),
         ));
