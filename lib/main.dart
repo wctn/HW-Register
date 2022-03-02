@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
-import 'welcome_page.dart';
+import 'foodMenu.dart';
 
 void main() {
-  runApp(const MyApp());
+  var app = runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,243 +11,77 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Flutter Demo",
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Form(),
+      title: "shop_6206022610068",
+      home: MyHomeApp(),
+      theme: ThemeData(primarySwatch: Colors.pink),
     );
   }
 }
 
-class Form extends StatefulWidget {
-  const Form({
-    Key? key,
-  }) : super(key: key);
+class MyHomeApp extends StatefulWidget {
+  const MyHomeApp({Key? key}) : super(key: key);
 
   @override
-  _FormState createState() => _FormState();
+  _MyHomeAppState createState() => _MyHomeAppState();
 }
 
-class _FormState extends State<Form> {
-  TextEditingController _name = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _gpa = TextEditingController();
-  TextEditingController _education = TextEditingController();
+class _MyHomeAppState extends State<MyHomeApp> {
+  List<foodMenu> menu = [
+    foodMenu("Notebook", "25000", "assets/images/img1.jpg"),
+    foodMenu("Tablet", "15,000", "assets/images/img2.png"),
+    foodMenu("PC", "35,000", "assets/images/img3.jpg"),
+  ];
 
   @override
   Widget build(BuildContext context) {
     List<Widget> data = [];
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Register",
-          ),
+      appBar: AppBar(
+        title: Text(
+          "shop_6206022610068",
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _name,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'ชื่อ-นามสกุล'),
+      ),
+      body: ListView.builder(
+          itemCount: menu.length,
+          itemBuilder: (BuildContext context, int index) {
+            foodMenu food = menu[index];
+            return ListTile(
+                leading: Image.asset(food.img),
+                title: Text(
+                  ' ${index + 1}' + '.' + food.name,
+                  style: TextStyle(fontSize: 22),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _email,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'E-mail'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _education,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'วุฒิการศึกษา'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _gpa,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'GPA'),
-                  keyboardType: TextInputType.number,
-                ),
-              ),
-              DropdownButton<String>(
-                hint: Text('โครงการรับสมัคร'),
-                items: <String>[
-                  'โครงการรับตรงสอบข้อเขียน',
-                  'โครงการโควตาพื้นที่',
-                  'โครงการ portfolio',
-                  'โครงการเรียนดี',
-                  'โครงการรับตรงใช้คะแนน GAT/PAT'
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
+                subtitle: Text("ราคา " + food.price + " บาท"),
+                onTap: () {
+                  AlertDialog alert = AlertDialog(
+                    title: Text("เมนูที่คุณเลือก คือ " + food.name),
                   );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              Container(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  'ภาควิชาและสาขาวิชาที่ต้องการสมัครเรียน',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(2.0),
-                child: Text(
-                  'ภาควิชาเทคโนโลยีสารสนเทศ',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              DropdownButton<String>(
-                hint: Text('หลักสูตร 4 ปีรับ ม.6 ปวช.'),
-                items: <String>[
-                  'สาขาวิชาเทคโนโลยีสารสนเทศ (IT) ',
-                  'สาขาวิชาวิศวกรรมสารสนเทศและเครือข่าย (INE)'
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },
                   );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              DropdownButton<String>(
-                hint: Text('หลักสูตร ต่อเนื่อง รับ ปวส.'),
-                items: <String>[
-                  'สาขาวิชาเทคโนโลยีสารสนเทศ (ITI)',
-                  'สาขาวิชาวิศวกรรมสารสนเทศและเครือข่าย (INET)'
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              Container(
-                padding: const EdgeInsets.all(.0),
-                child: Text(
-                  'ภาควิชาการจัดการอุตสาหกรรม',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              DropdownButton<String>(
-                hint: Text('หลักสูตร 4 ปีรับ ม.6 ปวช.'),
-                items: <String>[
-                  'สาขาวิชาวิสวกรรมอุตสาหกรรมและการจัดการ (IEM)',
-                  'สาขาวิชาเทคโนโลยีเครื่องกลและกระบวนการผลิต (MM)'
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              DropdownButton<String>(
-                hint: Text('หลักสูตร ต่อเนื่อง รับ ปวส.'),
-                items: <String>[
-                  'สาขาวิชาเทคโนโลยีสารสนเทศ (ITI)',
-                  'สาขาวิชาวิศวกรรมสารสนเทศและเครือข่าย (INET)'
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              Container(
-                padding: const EdgeInsets.all(2.0),
-                child: Text(
-                  'ภาควิชาวิศวกรรมเกษตรเพื่ออุตสาหกรรม',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              DropdownButton<String>(
-                hint: Text('หลักสูตร 4 ปีรับ ม.6 ปวช.'),
-                items: <String>[
-                  'สาขาวิชาวิศวกรรมเกษตรและอาหาร (AFE) ',
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              DropdownButton<String>(
-                hint: Text('หลักสูตร ต่อเนื่อง รับ ปวส.'),
-                items: <String>[
-                  'สาขาวิชาวิศวกรรมเกษตรและอาหาร (AFET)',
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              Container(
-                padding: const EdgeInsets.all(2.0),
-                child: Text(
-                  'ภาควิชาการออกแบบและบริหารงานก่อสร้าง',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              DropdownButton<String>(
-                hint: Text('หลักสูตร 4 ปีรับ ม.6 ปวช.'),
-                items: <String>[
-                  'สาขาวิชาคอมพิวเตอร์ช่วยออกแบบและบริหารงานก่อสร้าง (CA) ',
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              DropdownButton<String>(
-                hint: Text('หลักสูตร ต่อเนื่อง รับ ปวส.'),
-                items: <String>[
-                  'สาขาวิชาคอมพิวเตอร์ช่วยออกแบบและบริหารงานก่อสร้าง (CDM)',
-                ].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (_) {},
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => WelcomePage(
-                          name: _name.text,
-                          email: _email.text,
-                          education: _education.text,
-                          gpa: _gpa.text,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Text('Register'))
-            ],
-          ),
-        ));
+                  //print("คุณเลือกเมนู คือ " + food.name);
+                });
+          }),
+    );
   }
+}
+
+int number = 0;
+List<Widget> getData(int count) {
+  List<Widget> data = [];
+
+  for (var i = 1; i <= 10; i++) {
+    var menu = ListTile(
+      title: Text(
+        'เมนูที่ $i',
+        style: TextStyle(fontSize: 20, color: Colors.red),
+      ),
+      subtitle: Text('หัวข้อย่อยที่ $i'),
+    );
+    data.add(menu);
+  }
+  return data;
 }
